@@ -18,7 +18,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Insert your form-handling logic (e.g., send to API)
+    //api
     console.log("Form submitted:", formData);
     alert("Thank you for contacting us!");
     setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" });

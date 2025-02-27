@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
-
 import { navigation } from "../constants";
 import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
@@ -23,10 +22,13 @@ const Header = () => {
 
   const handleClick = () => {
     if (!openNavigation) return;
-
     enablePageScroll();
     setOpenNavigation(false);
   };
+
+  // Separate items: those with right: true will go to the right group
+  const centerNav = navigation.filter(item => !item.right);
+  const rightNav = navigation.filter(item => item.right);
 
   return (
     <div
@@ -35,48 +37,56 @@ const Header = () => {
       }`}
     >
       <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
-        
-      <header className="h-16 flex items-center px-4">
-  <a className="flex items-center text-2xl font-bold text-white xl:mr-4" href="#hero">
-    <img src="src\assets\4-small1-removebg-preview.png" alt="Logo" className="h-36 w-36 mr-2 object-contain" />
-    {/* NewWebsiteTitle */}
-  </a>
-</header>
+        {/* Logo (Left) */}
+        <div className="flex items-center">
+          <a className="flex items-center text-2xl font-bold text-white xl:mr-4" href="/">
+            <img
+              src="src/assets/4-small1-removebg-preview.png"
+              alt="Logo"
+              className="h-10 w-10 mr-2 object-contain"
+            />
+            Walkthrough.ai
+          </a>
+        </div>
 
-        {/* Navigation Links */}
+        {/* Center Navigation */}
         <nav
           className={`${
             openNavigation ? "flex" : "hidden"
           } fixed top-[5rem] left-0 right-0 bottom-0 bg-black lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
           <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
-            {navigation.map((item) => (
+            {centerNav.map((item) => (
               <a
                 key={item.id}
                 href={item.url}
                 onClick={handleClick}
-                className={`block relative font-code text-2xl uppercase text-white transition-colors hover:text-blue-400 ${
-                  item.onlyMobile ? "lg:hidden" : ""
-                } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-sm lg:font-semibold ${
-                  item.url === pathname.hash
-                    ? "z-2 lg:text-white"
-                    : "lg:text-gray-400"
+                className={`block relative font-code text-2xl uppercase text-white transition-colors hover:text-blue-400 px-6 py-6 md:py-8 lg:text-sm lg:font-semibold ${
+                  item.url === pathname.pathname ? "lg:text-white" : "lg:text-gray-400"
                 } lg:leading-5 lg:hover:text-white xl:px-12`}
               >
                 {item.title}
               </a>
             ))}
           </div>
-
-          <HamburgerMenu />
         </nav>
 
+        {/* Right Navigation */}
+        <div className="hidden lg:flex ml-auto">
+          {rightNav.map((item) => (
+            <a
+              key={item.id}
+              href={item.url}
+              onClick={handleClick}
+              className="block font-code text-sm uppercase text-white transition-colors hover:text-blue-400 px-4 py-2"
+            >
+              {item.title}
+            </a>
+          ))}
+        </div>
+
         {/* Mobile Menu Button */}
-        <Button
-          className="ml-auto lg:hidden"
-          px="px-3"
-          onClick={toggleNavigation}
-        >
+        <Button className="ml-auto lg:hidden" px="px-3" onClick={toggleNavigation}>
           <MenuSvg openNavigation={openNavigation} />
         </Button>
       </div>
