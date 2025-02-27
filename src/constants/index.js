@@ -62,12 +62,6 @@ export const navigation = [
     title: "New account/Sign in",
     url: "#signup",
     onlyMobile: false,
-  },
-  {
-    id: "4",
-    title: "New account/Sign in",
-    url: "#signup",
-    onlyMobile: false,
   }
 ];
 

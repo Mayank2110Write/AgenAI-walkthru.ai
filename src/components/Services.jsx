@@ -1,6 +1,6 @@
 import Section from "./Section";
 import Heading from "./Heading";
-import { service1Video, service2, service3Video, check } from "../assets";
+import { service1Video, service2Video, service3Video, check } from "../assets";
 import { brainwaveServices, brainwaveServicesIcons } from "../constants";
 import {
   PhotoChatMessage,
@@ -21,6 +21,7 @@ const Services = () => {
         />
 
         <div className="relative">
+          {/* FIRST VIDEO (service1.mp4) */}
           <div className="relative z-1 flex items-center h-[39rem] mb-5 p-8 border border-n-1/10 rounded-3xl overflow-hidden lg:p-20 xl:h-[46rem]">
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none md:w-3/5 xl:w-auto">
               <video
@@ -56,32 +57,33 @@ const Services = () => {
           </div>
 
           <div className="relative z-1 grid gap-5 lg:grid-cols-2">
+            {/* SECOND VIDEO (service2.mp4) */}
             <div className="relative min-h-[39rem] border border-n-1/10 rounded-3xl overflow-hidden">
               <div className="absolute inset-0">
-                <img
-                  src={service2}
-                  className="h-full w-full object-cover"
-                  width={630}
-                  height={750}
-                  alt="AI-Powered Tutorials"
-                />
+                <video
+                  className="h-[750px] w-[630px] object-cover"
+                  autoPlay
+                  loop
+                  muted
+                >
+                  <source src={service2Video} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
 
               <div className="absolute inset-0 flex flex-col justify-end p-8 bg-gradient-to-b from-n-8/0 to-n-8/90 lg:p-15">
                 <h4 className="h4 mb-4">Platform Usage Analytics</h4>
                 <p className="body-2 mb-[3rem] text-n-3">
-                  Capture user inputs and sync with AI to deliver personalized guide experiences.
+                  Capture user inputs and sync with AI to deliver personalized AI agent experiences.
                 </p>
               </div>
-
-              {/* <PhotoChatMessage /> */}
             </div>
 
             <div className="p-4 bg-n-7 rounded-3xl overflow-hidden lg:min-h-[46rem]">
               <div className="py-12 px-4 xl:px-8">
                 <h4 className="h4 mb-4">Import your DOM Documents</h4>
                 <p className="body-2 mb-[2rem] text-n-3">
-                  Import UI documents from custom data sources like docs or PDFs to get your walkthru.ai trained for your platform.
+                  Import UI documents from custom data sources like docs or PDFs to get your walkthru.ai trained.
                 </p>
 
                 <ul className="flex items-center justify-between">
@@ -108,6 +110,7 @@ const Services = () => {
                 </ul>
               </div>
 
+              {/* THIRD VIDEO (service3.mp4) */}
               <div className="relative h-[20rem] bg-n-8 rounded-xl overflow-hidden md:h-[25rem]">
                 <video
                   className="w-[520px] h-[400px] object-cover"
@@ -119,7 +122,6 @@ const Services = () => {
                   Your browser does not support the video tag.
                 </video>
 
-                {/* <VideoChatMessage /> */}
                 <VideoBar />
               </div>
             </div>
